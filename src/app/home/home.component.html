@@ -16,8 +16,14 @@
       ¡Explora nuestras actividades, descubre canciones y disfruta viendo cómo
       aprender puede ser algo fácil y alegre!
     </p>
-    <button mat-raised-button color="accent" [routerLink]="['/colors']">
-      Explorar Colores
-    </button>
+    <!-- Contenedor para los botones, que permite aplicar un espacio consistente -->
+    <div class="hero-actions">
+      <button mat-raised-button color="accent" [routerLink]="['/colors']">
+        Explorar Colores
+      </button>
+      <button mat-raised-button color="primary" [routerLink]="['/game']">
+        Jugar
+      </button>
+    </div>
   </div>
 </div>

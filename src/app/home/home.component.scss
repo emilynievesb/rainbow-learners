@@ -6,8 +6,6 @@
   flex: 1 1 auto;
   /* Fondo degradado vibrante */
   background: linear-gradient(135deg, #ffca28 30%, #ec407a 100%);
-  /* Ajusta un padding para que no quede pegado a los bordes */
-  //   padding: 2rem;
 }
 
 /* Contenedor translúcido para resaltar el texto */
@@ -46,4 +44,10 @@ button[mat-raised-button] {
   margin-top: 1rem;
   border-radius: 6px; /* Botón más amigable */
   text-transform: none; /* Evita mayúsculas forzadas */
+}
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Espaciado uniforme entre botones */
+  margin-top: 1.5rem;
 }
