@@ -1,9 +1,38 @@
-@if(color()){
-<section class="color-detail">
-  <h2>{{ color()!.english }}</h2>
-  <img [src]="color()!.image" [alt]="color()!.english" />
-  <p>{{ color()!.description || "No hay descripción disponible." }}</p>
-  <button (click)="playAudio(color()!.audio)">Escuchar Pronunciación</button>
-  <a [routerLink]="['/colors']" class="back-link">← Volver a la lista</a>
-</section>
-}
+<div class="detail-page-container">
+  <mat-card class="color-detail-card">
+    <!-- Banner decorativo superior -->
+    <div class="card-banner">
+      <h2>{{ color()?.english }}</h2>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="card-content">
+      <div class="image-wrapper">
+        <img [src]="color()?.image" [alt]="color()?.english" />
+      </div>
+      <div class="text-info">
+        <p>
+          {{
+            color()?.description ||
+              "Aquí encontrarás información mágica sobre este color y lo que representa para nuestros pequeños."
+          }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Sección de acciones -->
+    <mat-card-actions class="card-actions">
+      <button
+        mat-raised-button
+        color="accent"
+        class="listen-button"
+        (click)="playAudio(color()!.audio)"
+      >
+        Escuchar Audio
+      </button>
+      <a mat-button class="back-link" [routerLink]="['/colors']">
+        ← Volver a la Galería
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>

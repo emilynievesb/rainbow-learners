@@ -1,18 +1,103 @@
-.color-detail {
-  text-align: center;
-  padding: 2rem;
+.detail-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 30px);
+  padding: 1rem;
+  background: linear-gradient(135deg, #ffecb3, #f8bbd0);
 }
 
-.color-detail img {
-  width: 300px;
-  height: auto;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
+/* Estilos de la tarjeta (ya definidos anteriormente) */
+.color-detail-card {
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  transition: transform 0.3s ease;
 
-.back-link {
-  display: inline-block;
-  margin-top: 1rem;
-  text-decoration: none;
-  color: #007bff;
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-banner {
+    background: linear-gradient(135deg, #ffecb3, #f8bbd0);
+    padding: 1rem;
+    text-align: center;
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+      color: #d81b60;
+    }
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .image-wrapper {
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-color: #fafafa;
+      border-radius: 8px;
+
+      img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    .text-info {
+      p {
+        font-size: 1.1rem;
+        color: #424242;
+        line-height: 1.5;
+        text-align: justify;
+      }
+    }
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f5f5f5;
+
+    .listen-button {
+      background-color: #b2ebf2 !important;
+      color: #00796b !important;
+      font-size: 1.1rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-transform: none;
+      transition: background-color 0.3s ease;
+      box-shadow: none;
+
+      &:hover {
+        background-color: #80cbc4 !important;
+      }
+    }
+
+    a.back-link {
+      font-size: 1.1rem;
+      text-transform: none;
+      color: #1976d2;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #115293;
+      }
+    }
+  }
 }
