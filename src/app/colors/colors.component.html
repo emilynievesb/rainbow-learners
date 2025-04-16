@@ -1,13 +1,42 @@
-<section class="colors">
-  <h2>Aprende los Colores</h2>
-  <div class="gallery">
+<div class="colors-page">
+  <header class="colors-header">
+    <h1>Explora el Maravilloso Mundo de los Colores</h1>
+    <p>
+      Toca en cada color para escuchar su pronunciación y descubrir su magia.
+    </p>
+  </header>
+
+  <div class="colors-gallery">
     @for (color of colors(); track color.id) {
-    <div class="color-card">
-      <img [src]="color.image" [alt]="color.english" />
-      <h3>{{ color.english }}</h3>
-      <button (click)="playAudio(color.audio)">Escuchar Pronunciación</button>
-      <a [routerLink]="['/colors', color.id]">Ver Detalle</a>
-    </div>
+    <mat-card class="color-card">
+      <mat-card-header>
+        <mat-card-title>{{ color.english }}</mat-card-title>
+      </mat-card-header>
+
+      <!-- Contenedor para la imagen con un alto fijo -->
+      <div class="image-container">
+        <img [src]="color.image" [alt]="color.english" />
+      </div>
+
+      <mat-card-content>
+        <p>
+          {{ color.description || "Descubre la esencia de este color..." }}
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          class="listen-button"
+          (click)="playAudio(color.audio)"
+        >
+          Escuchar Audio
+        </button>
+        <a mat-button [routerLink]="['/colors', color.id]" class="detail-link">
+          Ver Detalle
+        </a>
+      </mat-card-actions>
+    </mat-card>
     }
   </div>
-</section>
+</div>
