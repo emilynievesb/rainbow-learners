@@ -1,0 +1,13 @@
+<section class="colors">
+  <h2>Aprende los Colores</h2>
+  <div class="gallery">
+    @for (color of colors(); track color.id) {
+    <div class="color-card">
+      <img [src]="color.image" [alt]="color.english" />
+      <h3>{{ color.english }}</h3>
+      <button (click)="playAudio(color.audio)">Escuchar Pronunciación</button>
+      <a [routerLink]="['/colors', color.id]">Ver Detalle</a>
+    </div>
+    }
+  </div>
+</section>
