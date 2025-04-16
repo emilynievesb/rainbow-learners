@@ -1,47 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-interface Color {
-  id: number;
-  name: string;
-  english: string;
-  image: string;
-  audio: string;
-}
+import { ColorService, Color } from '../services/color.service';
 
 @Component({
   selector: 'app-colors',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './colors.component.html',
-  styleUrl: './colors.component.scss',
+  styleUrls: ['./colors.component.scss'],
 })
 export class ColorsComponent {
-  // Almacenamos la lista de colores en una signal para hacerlo reactivo
-  colors = signal<Color[]>([
-    {
-      id: 1,
-      name: 'Rojo',
-      english: 'Red',
-      image: 'assets/images/red.jpg',
-      audio: 'assets/audio/red.mp3',
-    },
-    {
-      id: 2,
-      name: 'Verde',
-      english: 'Green',
-      image: 'assets/images/green.jpg',
-      audio: 'assets/audio/green.mp3',
-    },
-    {
-      id: 3,
-      name: 'Azul',
-      english: 'Blue',
-      image: 'assets/images/blue.jpg',
-      audio: 'assets/audio/blue.mp3',
-    },
-    // Agrega más colores según sea necesario
-  ]);
+  colors: typeof this.colorService.colors; // definir el tipo de "colors" (una signal)
+
+  constructor(private colorService: ColorService) {
+    // La asignación se realiza dentro del constructor, después de la inyección.
+    this.colors = this.colorService.colors;
+  }
 
   playAudio(audioUrl: string) {
     const audio = new Audio(audioUrl);
