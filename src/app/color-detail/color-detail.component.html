@@ -1,0 +1,9 @@
+@if(color()){
+<section class="color-detail">
+  <h2>{{ color()!.english }}</h2>
+  <img [src]="color()!.image" [alt]="color()!.english" />
+  <p>{{ color()!.description || "No hay descripción disponible." }}</p>
+  <button (click)="playAudio(color()!.audio)">Escuchar Pronunciación</button>
+  <a [routerLink]="['/colors']" class="back-link">← Volver a la lista</a>
+</section>
+}
