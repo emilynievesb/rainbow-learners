@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ocupar toda la altura de la pantalla */
+}
+
+router-outlet {
+  flex: 1 1 auto; /* El contenido crece */
+}
