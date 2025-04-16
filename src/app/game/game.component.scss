@@ -1,0 +1,29 @@
+.game-card {
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.options button {
+  flex: 1 1 40%;
+}

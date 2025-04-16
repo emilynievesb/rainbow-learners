@@ -1,0 +1,33 @@
+<mat-card class="game-card">
+  <mat-card-header>
+    <mat-card-title>Juego: Adivina el Color</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="game-content">
+      <img
+        [src]="currentQuestion().image"
+        [alt]="currentQuestion().correctColor"
+        class="game-image"
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="playAudio(currentQuestion().audio)"
+      >
+        Escuchar Audio
+      </button>
+      <div class="options">
+        <button
+          mat-button
+          *ngFor="let option of currentQuestion().options"
+          (click)="selectOption(option)"
+        >
+          {{ option }}
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="nextQuestion()">Siguiente</button>
+  </mat-card-actions>
+</mat-card>
