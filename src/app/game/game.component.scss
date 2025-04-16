@@ -1,29 +1,108 @@
-.game-card {
-  max-width: 400px;
-  margin: 2rem auto;
-}
-
-.game-content {
+.game-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.game-image {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.options {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  align-items: center;
+  min-height: calc(100vh - 60px); /* Considera la altura de toolbar/footer */
+  background: linear-gradient(135deg, #ffecb3, #f8bbd0);
+  padding: 2rem;
 }
 
-.options button {
-  flex: 1 1 40%;
+.game-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  mat-card-header {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 1rem;
+
+    mat-card-title {
+      font-size: 2rem;
+      color: #d81b60; /* Rosa vibrante */
+    }
+
+    mat-card-subtitle {
+      font-size: 1.2rem;
+      color: #5e35b1; /* Morado vivo */
+    }
+  }
+
+  .game-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+
+    /* Contenedor fijo para la imagen */
+    .image-wrapper {
+      width: 100%;
+      height: 250px; /* Altura fija para uniformidad */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fafafa;
+      border-radius: 8px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Cambia a contain si prefieres que se vea la imagen completa sin recorte */
+        display: block;
+      }
+    }
+
+    /* Botón de audio */
+    .play-button {
+      background-color: #b2ebf2;
+      color: #00796b;
+      transition: background-color 0.3s ease;
+
+      mat-icon {
+        font-size: 2rem;
+      }
+
+      &:hover {
+        background-color: #80cbc4;
+      }
+    }
+
+    /* Opciones de respuesta */
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+
+      button {
+        flex: 1 1 calc(45% - 1rem);
+        min-width: 120px;
+        text-transform: none;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .game-actions {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    text-align: center;
+
+    button {
+      text-transform: none;
+      font-size: 1.1rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+    }
+  }
 }

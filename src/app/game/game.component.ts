@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface GameQuestion {
   id: number;
@@ -14,7 +15,7 @@ export interface GameQuestion {
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatSnackBarModule],
+  imports: [MatCardModule, MatButtonModule, MatSnackBarModule, MatIconModule],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
@@ -25,14 +26,14 @@ export class GameComponent {
   questions: GameQuestion[] = [
     {
       id: 1,
-      image: 'assets/images/red.jpg',
+      image: 'assets/images/red.png',
       audio: 'assets/audio/red.mp3',
       correctColor: 'Red',
       options: ['Red', 'Green', 'Blue', 'Yellow'],
     },
     {
       id: 2,
-      image: 'assets/images/blue.jpg',
+      image: 'assets/images/blue.png',
       audio: 'assets/audio/blue.mp3',
       correctColor: 'Blue',
       options: ['Green', 'Blue', 'Red', 'Orange'],
