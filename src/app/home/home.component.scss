@@ -1,13 +1,49 @@
-.home {
-  text-align: center;
-  margin-top: 2rem;
+.home-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+  /* Fondo degradado vibrante */
+  background: linear-gradient(135deg, #ffca28 30%, #ec407a 100%);
+  /* Ajusta un padding para que no quede pegado a los bordes */
+  //   padding: 2rem;
 }
 
-.btn {
-  padding: 1rem 2rem;
-  background-color: #ff9800;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+/* Contenedor translúcido para resaltar el texto */
+.hero-content {
+  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content h1 {
+  color: #d81b60; /* Un rosa fuerte */
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+  color: #fb8c00; /* Un naranja vibrante */
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+  color: #444; /* Contraste con el fondo */
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+button[mat-raised-button] {
   font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 6px; /* Botón más amigable */
+  text-transform: none; /* Evita mayúsculas forzadas */
 }
