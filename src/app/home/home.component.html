@@ -1,7 +1,35 @@
+<!-- 
+  home-container:
+  Contenedor principal de la landing page.
+  - Propósito: Centrar vertical y horizontalmente el contenido de bienvenida.
+  - Diseño: Ocupa todo el alto disponible entre toolbar y footer, con padding para separación.
+-->
 <div class="home-container">
+  <!-- 
+    hero-content:
+    Sección central de bienvenida.
+    - Propósito: Presentar el concepto y las ventajas de Rainbow Learners.
+    - Diseño: Tarjeta translúcida con fondo blanco semi-opaco, bordes redondeados y sombra suave.
+  -->
   <div class="hero-content">
+    <!-- 
+      Título principal:
+      - Propósito: Atraer la atención del usuario y comunicar el nombre de la plataforma.
+    -->
     <h1>¡Bienvenidos a Rainbow Learners!</h1>
+
+    <!-- 
+      Subtítulo:
+      - Propósito: Resumir la propuesta de valor de forma breve y amigable.
+    -->
     <h2>Aprender colores en inglés nunca fue tan divertido</h2>
+
+    <!-- 
+      Párrafos descriptivos:
+      - Propósito: Explicar en detalle cómo funciona la plataforma, 
+        qué recursos ofrece (imágenes, audios, juegos) y beneficios.
+      - Estructura: Uso de varios párrafos para mejorar legibilidad en preescolares.
+    -->
     <p>
       Rainbow Learners es una plataforma en línea gratuita diseñada para enseñar
       a los niños de edad preescolar los colores en inglés de una forma amigable
@@ -16,11 +44,28 @@
       ¡Explora nuestras actividades, descubre canciones y disfruta viendo cómo
       aprender puede ser algo fácil y alegre!
     </p>
-    <!-- Contenedor para los botones, que permite aplicar un espacio consistente -->
+
+    <!--
+      hero-actions:
+      Contenedor de botones de llamada a la acción.
+      - Propósito: Ofrecer enlaces directos a la galería de colores y al juego.
+      - Diseño: Flexbox con gap para espacio uniforme, botón destacado en color accent y primary.
+    -->
     <div class="hero-actions">
+      <!-- 
+        Botón "Explorar Colores":
+        - Navega a la ruta '/colors' mediante RouterLink.
+        - Estilo: mat-raised-button con color accent para destacar.
+      -->
       <button mat-raised-button color="accent" [routerLink]="['/colors']">
         Explorar Colores
       </button>
+
+      <!-- 
+        Botón "Jugar":
+        - Navega a la ruta '/game' mediante RouterLink.
+        - Estilo: mat-raised-button con color primary para ofrecer contraste.
+      -->
       <button mat-raised-button color="primary" [routerLink]="['/game']">
         Jugar
       </button>

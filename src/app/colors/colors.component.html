@@ -1,4 +1,17 @@
+<!--
+  colors-page:
+  Contenedor principal de la página de colores.
+  - Propósito: Mostrar la galería de colores con sus nombres, imágenes,
+    descripciones y acciones (escuchar audio, ver detalle).
+  - Diseño: Fondo degradado suave para mantener la identidad visual colorida.
+-->
 <div class="colors-page">
+  <!--
+    colors-header:
+    Encabezado de la sección.
+    - Propósito: Introducir al usuario en la funcionalidad de la galería.
+    - Contiene un título principal y un subtítulo explicativo.
+  -->
   <header class="colors-header">
     <h1>Explora el Maravilloso Mundo de los Colores</h1>
     <p>
@@ -6,24 +19,64 @@
     </p>
   </header>
 
+  <!--
+    colors-gallery:
+    Contenedor de la cuadrícula de tarjetas.
+    - Propósito: Disponer las tarjetas en un layout responsive con flex-wrap.
+    - Lógica: Se usa @for para iterar sobre la señal colors(), que es un array reactivo.
+      track color.id asegura renderizado eficiente identificando cada tarjeta.
+  -->
   <div class="colors-gallery">
     @for (color of colors(); track color.id) {
+
+    <!--
+        color-card:
+        Tarjeta individual para cada Color.
+        - Variables:
+          color: objeto con propiedades { id, english, image, audio, description }.
+        - Diseño: Fondo blanco neutro y bordes redondeados para destacar sobre el fondo.
+      -->
     <mat-card class="color-card">
+      <!--
+          mat-card-header:
+          Sección superior de la tarjeta.
+          - Contiene el título (nombre del color en inglés).
+          - Diseño: Fondo gris claro para separar visualmente.
+        -->
       <mat-card-header>
         <mat-card-title>{{ color.english }}</mat-card-title>
       </mat-card-header>
 
-      <!-- Contenedor para la imagen con un alto fijo -->
+      <!--
+          image-container:
+          Contenedor con altura fija para la imagen.
+          - Propósito: Asegurar que todas las imágenes tengan el mismo tamaño de visualización.
+          - Diseño: Centrado de la imagen con object-fit: contain para evitar recortes.
+        -->
       <div class="image-container">
         <img [src]="color.image" [alt]="color.english" />
       </div>
 
+      <!--
+          mat-card-content:
+          Sección de descripción.
+          - Muestra la propiedad description del objeto color o un texto por defecto.
+          - Lógica: Uso de operador || para fallback cuando no hay descripción.
+        -->
       <mat-card-content>
         <p>
           {{ color.description || "Descubre la esencia de este color..." }}
         </p>
       </mat-card-content>
 
+      <!--
+          mat-card-actions:
+          Sección de acciones de la tarjeta.
+          - Incluye:
+            * Botón "Escuchar Audio": llama a playAudio(color.audio).
+            * Enlace "Ver Detalle": navegación a la ruta /colors/:id.
+          - Diseño: Botones estilizados con Angular Material y clases personalizadas.
+        -->
       <mat-card-actions>
         <button
           mat-raised-button

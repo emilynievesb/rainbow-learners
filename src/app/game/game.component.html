@@ -1,12 +1,46 @@
+<!--
+  game-container:
+  Contenedor principal que centra la tarjeta de juego en pantalla.
+  - Propósito: Colocar el GameComponent en el centro vertical y horizontal.
+  - Diseño: Fondo degradado acorde a la identidad, padding para separación.
+-->
 <div class="game-container">
+  <!--
+    game-card:
+    Tarjeta principal que agrupa todo el contenido del juego.
+    - Propósito: Proveer un contenedor claro y definido para la actividad.
+    - Diseño: Esquinas redondeadas, sombra suave y fondo blanco para destacar.
+  -->
   <mat-card class="game-card">
+    <!--
+      mat-card-header:
+      Encabezado de la tarjeta.
+      - Contiene:
+        * mat-card-title: Título principal del juego.
+        * mat-card-subtitle: Subtítulo que invita a la interacción.
+      - Diseño: Fondo gris claro para separar del contenido principal.
+    -->
     <mat-card-header>
       <mat-card-title>¡Adivina el Color!</mat-card-title>
       <mat-card-subtitle>Diviértete y aprende</mat-card-subtitle>
     </mat-card-header>
 
+    <!--
+      game-content:
+      Sección central con imagen, audio y opciones.
+      - Propósito: Mostrar la pregunta (imagen + audio) y las posibles respuestas.
+      - Estructura en columnas:
+        1. image-wrapper: Imagen fija
+        2. play-wrapper: Botón para reproducir audio
+        3. options: Botones de respuesta
+    -->
     <div class="game-content">
-      <!-- Contenedor para la imagen con tamaño fijo -->
+      <!--
+        image-wrapper:
+        Contenedor de la imagen del color.
+        - Propósito: Mantener tamaño uniforme en todas las preguntas.
+        - Diseño: object-fit: contain para ver la imagen completa sin recortes.
+      -->
       <div class="image-wrapper">
         <img
           [src]="currentQuestion().image"
@@ -14,8 +48,18 @@
         />
       </div>
 
-      <!-- Botón de reproducción del audio con ícono -->
+      <!--
+        play-wrapper:
+        Contenedor circular alrededor del botón de audio.
+        - Propósito: Resaltar la acción de reproducir sonido de forma clara y proporcionada.
+      -->
       <div class="play-wrapper">
+        <!--
+          play-button:
+          Botón con ícono para reproducir el audio de la pregunta actual.
+          - Evento click: llama a playAudio() pasando la URL almacenada en currentQuestion().audio.
+          - Diseño: mat-icon-button con ícono de volumen.
+        -->
         <button
           mat-icon-button
           class="play-button"
@@ -25,9 +69,23 @@
         </button>
       </div>
 
-      <!-- Opciones coloreadas dinámicamente -->
+      <!--
+        options:
+        Contenedor de botones de respuesta.
+        - Propósito: Listar las opciones disponibles para adivinar el color.
+        - Lógica de iteración: @for itera sobre currentQuestion().options,
+          usando track option para optimizar renderizado.
+        - Diseño: Flex-wrap y gap para distribuir uniformemente.
+      -->
       <div class="options">
         @for (option of currentQuestion().options; track option) {
+        <!--
+            option-button:
+            Botón individual de cada opción.
+            - Propósito: Permitir al usuario seleccionar una respuesta.
+            - Estilo dinámico: [style] aplica color de texto y borde basado en getOptionColor(option).
+            - Evento click: llama a selectOption(option) para evaluar la respuesta.
+          -->
         <button
           mat-stroked-button
           class="option-button"
@@ -43,6 +101,13 @@
       </div>
     </div>
 
+    <!--
+      game-actions:
+      Sección final con el botón "Siguiente".
+      - Propósito: Permitir avanzar a la siguiente pregunta.
+      - Lógica: [disabled] vinculado a correctAnswered() para bloquear hasta acertar.
+      - Diseño: next-button personalizado con degradado y efecto hover.
+    -->
     <mat-card-actions class="game-actions">
       <button
         mat-raised-button

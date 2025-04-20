@@ -1,15 +1,30 @@
+<!-- Contenedor principal de la página de detalle, centrado y con fondo degradado -->
 <div class="detail-page-container">
+  <!-- Tarjeta principal que muestra la información del color seleccionado -->
   <mat-card class="color-detail-card">
-    <!-- Banner decorativo superior -->
+    <!-- ================================================
+         Sección de banner
+         Propósito: Mostrar de forma destacada el nombre del color
+         Diseño: Banner con degradado para reforzar la identidad visual
+         ================================================= -->
     <div class="card-banner">
+      <!-- Título dinámico: nombre del color en inglés -->
       <h2>{{ color()?.english }}</h2>
     </div>
 
-    <!-- Contenido principal -->
+    <!-- ================================================
+         Contenido principal
+         Propósito: Mostrar la imagen y descripción del color
+         - image-wrapper: contenedor fijo para dimensionar uniformemente la imagen
+         - text-info: bloque de texto con descripción, permite fallback si no hay descripción
+         ================================================= -->
     <div class="card-content">
+      <!-- Contenedor de la imagen con tamaño fijo y centrado -->
       <div class="image-wrapper">
+        <!-- Imagen del color: src y alt se enlazan al objeto 'color' del componente -->
         <img [src]="color()?.image" [alt]="color()?.english" />
       </div>
+      <!-- Bloque de texto descriptivo -->
       <div class="text-info">
         <p>
           {{
@@ -20,8 +35,16 @@
       </div>
     </div>
 
-    <!-- Sección de acciones -->
+    <!-- ================================================
+         Sección de acciones
+         Propósito: Permitir al usuario escuchar la pronunciación
+         y regresar a la galería de colores
+         - Botón "Escuchar Audio": invoca método playAudio() del componente
+         - Enlace "Volver a la Galería": navegación con routerLink
+         Diseñado con Angular Material para interfaz consistente
+         ================================================= -->
     <mat-card-actions class="card-actions">
+      <!-- Botón que reproduce el audio del color actual -->
       <button
         mat-raised-button
         color="accent"
@@ -30,6 +53,7 @@
       >
         Escuchar Audio
       </button>
+      <!-- Enlace de navegación para regresar a la lista de colores -->
       <a mat-button class="back-link" [routerLink]="['/colors']">
         ← Volver a la Galería
       </a>

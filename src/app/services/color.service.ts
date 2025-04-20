@@ -1,11 +1,22 @@
 import { Injectable, signal } from '@angular/core';
 
+/**
+ * Interface Color
+ *
+ * Define la estructura de datos para representar un color en la aplicación.
+ */
 export interface Color {
+  /** Identificador único del color (usado para trackeo y consultas). */
   id: number;
+  /** Nombre en español (puede usarse para futuras localizaciones). */
   name: string;
+  /** Nombre en inglés, que se muestra al usuario. */
   english: string;
+  /** Ruta al recurso de imagen que representa visualmente el color. */
   image: string;
+  /** Ruta al archivo de audio con la pronunciación del color en inglés. */
   audio: string;
+  /** Descripción opcional que aporta información adicional sobre el color. */
   description?: string;
 }
 
@@ -13,7 +24,13 @@ export interface Color {
   providedIn: 'root',
 })
 export class ColorService {
-  // Creamos una signal privada que almacena el arreglo de colores
+  /**
+   * _colors
+   * Señal privada que almacena el arreglo de colores.
+   * - Uso de `signal` para que cualquier componente que consuma esta señal
+   *   se actualice automáticamente si los datos cambian.
+   * - Inicializa la aplicación con tres colores de ejemplo.
+   */
   private _colors = signal<Color[]>([
     {
       id: 1,
@@ -39,15 +56,31 @@ export class ColorService {
       audio: 'assets/audio/blue.mp3',
       description: 'El azul es un color calmante y refrescante.',
     },
-    // Agrega más colores conforme los necesites…
+    // Agrega más objetos Color conforme se necesiten.
   ]);
 
-  // Método getter que retorna la signal de colores (lectura reactiva)
+  /**
+   * Getter colors
+   *
+   * Proporciona acceso de solo lectura a la lista de colores como señal.
+   * Permite a los componentes suscribirse y reaccionar a cambios automáticamente.
+   */
   get colors() {
     return this._colors;
   }
 
-  // Método para obtener un color por su id
+  /**
+   * getColorById
+   *
+   * Busca y devuelve un objeto Color según su identificador.
+   *
+   * @param id - Identificador único del color que se desea obtener.
+   * @returns El objeto Color correspondiente o undefined si no existe.
+   *
+   * Lógica:
+   * 1. Llama a la señal `_colors()` para obtener el arreglo actual.
+   * 2. Utiliza `find` para localizar el primer elemento con el id coincidente.
+   */
   getColorById(id: number): Color | undefined {
     return this._colors().find((color) => color.id === id);
   }
