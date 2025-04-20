@@ -1,59 +1,63 @@
-# RainbowLearners
+# 🌈 Rainbow Learners
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+Rainbow Learners es una plataforma educativa interactiva diseñada para enseñar colores en inglés a niños de edad preescolar de una manera divertida, visual y auditiva.
 
-## Development server
+## 🎯 Objetivos
 
-To start a local development server, run:
+- Facilitar el aprendizaje del vocabulario básico en inglés relacionado con los colores.
+- Promover habilidades cognitivas y auditivas mediante juegos y recursos interactivos.
+- Crear una experiencia educativa entretenida y accesible para niños pequeños.
 
-```bash
-ng serve
+## 🚀 Funcionalidades Principales
+
+- **Pantalla de bienvenida:** Introducción sencilla e interactiva al contenido disponible.
+- **Galería interactiva:** Muestra colores con imágenes, audios de pronunciación y descripciones breves.
+- **Juego de adivinanzas:** Juego interactivo para identificar colores a partir de imágenes y audios, con retroalimentación inmediata.
+
+## ⚙️ Tecnologías
+
+- **Angular v19** (con Signals)
+- **Angular Material**
+- **TypeScript**
+- **HTML y SCSS**
+
+## 📂 Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── home/
+│   ├── colors/
+│   ├── color-detail/
+│   ├── game/
+│   └── services/
+└── assets/
+    ├── images/
+    └── audio/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Instalación y Ejecución
 
 ```bash
-ng generate component component-name
+# Instalar dependencias
+npm install
+
+# Ejecutar el proyecto
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Abre tu navegador en: `http://localhost:4200`
 
-```bash
-ng generate --help
-```
+## ✅ Próximas Funcionalidades
 
-## Building
+- Sistema de estrellas y vidas.
+- Temporizador para juego tipo Kahoot.
+- Mini juego de mezcla de colores.
 
-To build the project run:
+## 📅 Cronograma Estimado
 
-```bash
-ng build
-```
+- **Finalización:** 5 Mayo 2025
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📚 Autores
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Proyecto desarrollado como parte de la asignatura **Lenguajes de Programación**, Universidad de Santander (UDES).
