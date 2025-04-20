@@ -15,20 +15,26 @@
       </div>
 
       <!-- Botón de reproducción del audio con ícono -->
-      <button
-        mat-icon-button
-        class="play-button"
-        (click)="playAudio(currentQuestion().audio)"
-      >
-        <mat-icon>volume_up</mat-icon>
-      </button>
+      <div class="play-wrapper">
+        <button
+          mat-icon-button
+          class="play-button"
+          (click)="playAudio(currentQuestion().audio)"
+        >
+          <mat-icon>volume_up</mat-icon>
+        </button>
+      </div>
 
-      <!-- Opciones de respuesta -->
+      <!-- Opciones coloreadas dinámicamente -->
       <div class="options">
         @for (option of currentQuestion().options; track option) {
         <button
           mat-stroked-button
-          color="primary"
+          class="option-button"
+          [style]="{
+            'border-color': getOptionColor(option),
+            color: getOptionColor(option)
+          }"
           (click)="selectOption(option)"
         >
           {{ option }}
@@ -38,7 +44,12 @@
     </div>
 
     <mat-card-actions class="game-actions">
-      <button mat-raised-button color="accent" (click)="nextQuestion()">
+      <button
+        mat-raised-button
+        class="next-button"
+        (click)="nextQuestion()"
+        [disabled]="!correctAnswered()"
+      >
         Siguiente
       </button>
     </mat-card-actions>
