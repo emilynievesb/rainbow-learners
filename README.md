@@ -13,6 +13,9 @@ Rainbow Learners es una plataforma educativa interactiva diseñada para enseñar
 - **Pantalla de bienvenida:** Introducción sencilla e interactiva al contenido disponible.
 - **Galería interactiva:** Muestra colores con imágenes, audios de pronunciación y descripciones breves.
 - **Juego de adivinanzas:** Juego interactivo para identificar colores a partir de imágenes y audios, con retroalimentación inmediata.
+- **Sistema de estrellas y vidas:** Gamificación con estrellas por aciertos y vidas limitadas para mantener el reto.
+- **Temporizador estilo Kahoot:** Cuenta regresiva para responder cada pregunta y añadir emoción.
+- **Mini juego de mezcla de colores:** Permite seleccionar dos colores, ver su combinación resultante y escuchar su pronunciación.
 
 ## ⚙️ Tecnologías
 
@@ -23,15 +26,16 @@ Rainbow Learners es una plataforma educativa interactiva diseñada para enseñar
 
 ## 📂 Estructura del Proyecto
 
-```
+```text
 src/
 ├── app/
 │   ├── home/
 │   ├── colors/
 │   ├── color-detail/
 │   ├── game/
+│   ├── color-mix/
 │   └── services/
-└── assets/
+└── public/assets/
     ├── images/
     └── audio/
 ```
@@ -42,22 +46,12 @@ src/
 # Instalar dependencias
 npm install
 
-# Ejecutar el proyecto
-npm start
+# Ejecutar el proyecto en modo desarrollo
+ng serve
 ```
 
 Abre tu navegador en: `http://localhost:4200`
 
-## ✅ Próximas Funcionalidades
-
-- Sistema de estrellas y vidas.
-- Temporizador para juego tipo Kahoot.
-- Mini juego de mezcla de colores.
-
-## 📅 Cronograma Estimado
-
-- **Finalización:** 5 Mayo 2025
-
 ## 📚 Autores
 
-Proyecto desarrollado como parte de la asignatura **Lenguajes de Programación**, Universidad de Santander (UDES).
+Desarrollado para la asignatura **Lenguajes de Programación**, Universidad de Santander (UDES).
