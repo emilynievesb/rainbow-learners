@@ -6,15 +6,32 @@
     </div>
 
     <mat-card-content class="mix-content">
+      <!-- Selección de Color A con fondo dinámico -->
       <div class="pick">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="color-input">
           <mat-label>Color A</mat-label>
           <mat-select
             [value]="pickA()"
             (selectionChange)="pickA.set($event.value); mixColors()"
+            [style.backgroundColor]="
+              pickA() ? colorService.getOptionColor(pickA()!.english) : ''
+            "
+            [style.color]="
+              pickA()
+                ? getContrastColor(
+                    colorService.getOptionColor(pickA()!.english)
+                  )
+                : ''
+            "
           >
             @for (c of colors(); track c.id) {
-            <mat-option [value]="c">
+            <mat-option
+              [value]="c"
+              [style.backgroundColor]="colorService.getOptionColor(c.english)"
+              [style.color]="
+                getContrastColor(colorService.getOptionColor(c.english))
+              "
+            >
               {{ c.english }}
             </mat-option>
             }
@@ -22,15 +39,32 @@
         </mat-form-field>
       </div>
 
+      <!-- Selección de Color B con fondo dinámico -->
       <div class="pick">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="color-input">
           <mat-label>Color B</mat-label>
           <mat-select
             [value]="pickB()"
             (selectionChange)="pickB.set($event.value); mixColors()"
+            [style.backgroundColor]="
+              pickB() ? colorService.getOptionColor(pickB()!.english) : ''
+            "
+            [style.color]="
+              pickB()
+                ? getContrastColor(
+                    colorService.getOptionColor(pickB()!.english)
+                  )
+                : ''
+            "
           >
             @for (c of colors(); track c.id) {
-            <mat-option [value]="c">
+            <mat-option
+              [value]="c"
+              [style.backgroundColor]="colorService.getOptionColor(c.english)"
+              [style.color]="
+                getContrastColor(colorService.getOptionColor(c.english))
+              "
+            >
               {{ c.english }}
             </mat-option>
             }
@@ -38,11 +72,61 @@
         </mat-form-field>
       </div>
 
+      <!-- Visualización A + B = Resultado -->
       @if (pickA() && pickB()) {
-      <div class="result">
-        <p class="result-label">Resultado:</p>
-        <div class="color-box" [style.backgroundColor]="mixedHex()"></div>
-        <p class="hex-code">{{ mixedHex() }}</p>
+      <div class="mix-visual">
+        <!-- Caja Color A -->
+        <div class="box">
+          <div
+            class="color-box"
+            [style.backgroundColor]="
+              colorService.getOptionColor(pickA()!.english)
+            "
+          ></div>
+          <div class="box-footer">
+            <span>{{ pickA()!.english }}</span>
+            <button mat-icon-button (click)="playAudio(pickA()!.audio)">
+              <mat-icon>volume_up</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Operador + -->
+        <div class="operator">+</div>
+
+        <!-- Caja Color B -->
+        <div class="box">
+          <div
+            class="color-box"
+            [style.backgroundColor]="
+              colorService.getOptionColor(pickB()!.english)
+            "
+          ></div>
+          <div class="box-footer">
+            <span>{{ pickB()!.english }}</span>
+            <button mat-icon-button (click)="playAudio(pickB()!.audio)">
+              <mat-icon>volume_up</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Operador = -->
+        <div class="operator">=</div>
+
+        <!-- Caja Resultado -->
+        <div class="box">
+          <div class="color-box" [style.backgroundColor]="mixedHex()"></div>
+          <div class="box-footer">
+            <span>{{ resultName() }}</span>
+            <button
+              mat-icon-button
+              (click)="playAudioForResult()"
+              [disabled]="!resultAudio()"
+            >
+              <mat-icon>volume_up</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
       }
     </mat-card-content>
