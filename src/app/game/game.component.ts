@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,7 +31,7 @@ export interface GameQuestion {
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent {
+export class GameComponent implements OnInit {
   /**
    * Constructor
    * @param snackBar - Servicio para mostrar notificaciones emergentes (snack bars).
@@ -88,6 +88,94 @@ export class GameComponent {
   correctAnswered = signal(false);
 
   /**
+   * INITIAL_TIME
+   * Constante que define el tiempo inicial (en segundos) para cada pregunta.
+   */
+  readonly INITIAL_TIME = 15;
+
+  /**
+   * timeLeft
+   * Signal que almacena los segundos restantes del temporizador.
+   */
+  timeLeft = signal(this.INITIAL_TIME);
+
+  /**
+   * timerId
+   * Identificador del intervalo del temporizador para poder detenerlo.
+   */
+  private timerId: any;
+
+  /**
+   * lives
+   * Signal que almacena las vidas restantes del jugador.
+   * Funcionalidad añadida: Sistema de vidas para limitar intentos.
+   */
+  lives = signal(3);
+
+  /**
+   * gameOver
+   * Signal booleana que indica si el juego ha terminado por agotamiento de vidas.
+   */
+  gameOver = signal(false);
+
+  /**
+   * livesArray
+   * Getter que expone un array de índices [0..lives-1] para iterar en plantilla.
+   * Permite usar: @for (life of livesArray; track life)
+   */
+  get livesArray(): number[] {
+    return Array.from({ length: this.lives() }, (_, i) => i);
+  }
+
+  /**
+   * ngOnInit
+   * Ciclo de vida Angular que se ejecuta al inicializar el componente.
+   * Inicia el temporizador para la primera pregunta.
+   */
+  ngOnInit() {
+    this.startTimer(); // Iniciar contador al cargar
+  }
+
+  /**
+   * startTimer
+   * Propósito: Iniciar o reiniciar el temporizador de cuenta regresiva.
+   * Lógica:
+   *  1. Limpia cualquier intervalo previo.
+   *  2. Resetea `timeLeft` al valor inicial.
+   *  3. Crea un setInterval que decrementa `timeLeft` cada segundo.
+   *  4. Al llegar a 0, detiene el intervalo y llama a onTimeOut().
+   */
+  private startTimer() {
+    if (this.timerId) {
+      clearInterval(this.timerId); // Limpiar intervalo anterior
+    }
+    this.timeLeft.set(this.INITIAL_TIME); // Reset del temporizador
+    this.timerId = setInterval(() => {
+      const t = this.timeLeft() - 1;
+      this.timeLeft.set(t);
+      if (t <= 0) {
+        clearInterval(this.timerId); // Detener cuando llegue a 0
+        this.onTimeOut(); // Manejar fin de tiempo
+      }
+    }, 1000);
+  }
+
+  /**
+   * onTimeOut
+   * Propósito: Gestionar la situación cuando el temporizador llega a 0.
+   * Lógica:
+   *  - Muestra un mensaje para indicar que el tiempo se acabó.
+   *  - Las opciones quedan deshabilitadas hasta respuesta correcta.
+   */
+  private onTimeOut() {
+    this.snackBar.open(
+      'Se acabó el tiempo. ¡Responde correctamente para continuar!',
+      'Cerrar',
+      { duration: 2000 }
+    );
+  }
+
+  /**
    * playAudio
    * Propósito: Reproducir un archivo de audio dado su URL.
    * Lógica:
@@ -106,73 +194,90 @@ export class GameComponent {
    * selectOption
    * Propósito: Manejar la selección de una opción por parte del usuario.
    * Lógica:
-   *  1. Reproducir el audio de la opción seleccionada, construyendo la ruta
-   *     basándose en la cadena `option.toLowerCase()`.
-   *  2. Comparar `option` con la propiedad `correctColor` de la pregunta actual.
+   *  1. Reproducir el audio de la opción seleccionada.
+   *  2. Validar si la opción es la correcta.
    *  3. Si es correcta:
    *      - Marcar `correctAnswered` como true.
+   *      - Detener el temporizador.
    *      - Mostrar snackBar de éxito.
    *     Si es incorrecta:
-   *      - Mantener `correctAnswered` en false.
-   *      - Mostrar snackBar de error.
+   *      - Decrementar `lives` en 1.
+   *      - Si `lives` llega a 0:
+   *          * Marcar `gameOver` como true.
+   *          * Detener el temporizador y mostrar snackBar de Game Over.
+   *        Si no:
+   *          * Mostrar snackBar con vidas restantes.
+   * Opciones se deshabilitan si `timeLeft` es 0, `correctAnswered` o `gameOver`.
    * @param option - Cadena de la opción seleccionada por el usuario.
    */
   selectOption(option: string) {
-    // Paso 1: reproducir audio de la opción
     const optionAudio = `assets/audio/${option.toLowerCase()}.mp3`;
     this.playAudio(optionAudio);
 
-    // Paso 2: validar si la opción es la correcta
     if (option === this.currentQuestion().correctColor) {
       this.correctAnswered.set(true);
+      clearInterval(this.timerId);
       this.snackBar.open(
         '¡Correcto! Ahora puedes pasar a la siguiente.',
         'Cerrar',
-        {
-          duration: 1500,
-        }
+        { duration: 1500 }
       );
     } else {
-      this.snackBar.open('Incorrecto, inténtalo nuevamente.', 'Cerrar', {
-        duration: 1500,
-      });
-      // correctAnswered permanece false, bloqueando "Siguiente"
+      const remaining = this.lives() - 1;
+      this.lives.set(remaining);
+      if (remaining <= 0) {
+        this.gameOver.set(true);
+        clearInterval(this.timerId);
+        this.snackBar.open('Game Over. Se acabaron tus vidas.', 'Cerrar', {
+          duration: 2000,
+        });
+      } else {
+        this.snackBar.open(
+          `Incorrecto. Te quedan ${remaining} vidas.`,
+          'Cerrar',
+          { duration: 1500 }
+        );
+      }
     }
   }
 
   /**
    * nextQuestion
    * Propósito: Avanzar a la siguiente pregunta si y solo si la pregunta
-   *            actual ha sido respondida correctamente.
+   *            actual ha sido respondida correctamente o si el juego terminó.
    * Lógica:
-   *  1. Verificar `correctAnswered`; si es false, mostrar mensaje y abortar.
-   *  2. Incrementar `currentQuestionIndex` circulando al inicio si excede el largo.
-   *  3. Actualizar `currentQuestion` con la nueva pregunta.
-   *  4. Resetear `correctAnswered` a false para la siguiente pregunta.
+   *  1. Si `gameOver` es true, reiniciar vidas y bandera de fin de juego.
+   *  2. Verificar `correctAnswered`; si es false, mostrar mensaje y abortar.
+   *  3. Incrementar `currentQuestionIndex` circulando al inicio si excede el largo.
+   *  4. Actualizar `currentQuestion` con la nueva pregunta.
+   *  5. Resetear `correctAnswered` a false.
+   *  6. Reiniciar el temporizador para la nueva pregunta.
    */
   nextQuestion() {
+    if (this.gameOver()) {
+      this.lives.set(3);
+      this.gameOver.set(false);
+    }
     if (!this.correctAnswered()) {
       this.snackBar.open(
         'Debes responder correctamente para continuar.',
         'Cerrar',
-        {
-          duration: 1500,
-        }
+        { duration: 1500 }
       );
       return;
     }
 
-    // Avanzar índice y circular al inicio si es necesario
     let nextIndex = this.currentQuestionIndex() + 1;
     if (nextIndex >= this.questions.length) {
-      nextIndex = 0; // decisión de diseño: reiniciar el juego al terminar
+      nextIndex = 0;
+      this.lives.set(3);
+      this.gameOver.set(false);
     }
 
-    // Actualizar señales para nueva pregunta
     this.currentQuestionIndex.set(nextIndex);
     this.currentQuestion.set(this.questions[nextIndex]);
-    // Resetear estado de respuesta correcta
     this.correctAnswered.set(false);
+    this.startTimer();
   }
 
   /**

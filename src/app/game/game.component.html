@@ -19,10 +19,20 @@
         * mat-card-title: Título principal del juego.
         * mat-card-subtitle: Subtítulo que invita a la interacción.
       - Diseño: Fondo gris claro para separar del contenido principal.
+      - Funcionalidad añadida: Muestra vidas como iconos de corazón.
     -->
     <mat-card-header>
       <mat-card-title>¡Adivina el Color!</mat-card-title>
-      <mat-card-subtitle>Diviértete y aprende</mat-card-subtitle>
+      <mat-card-subtitle>
+        <!-- heart-display: Muestra las vidas restantes -->
+        <span class="lives">
+          @for (life of livesArray; track life) {
+          <mat-icon color="warn">favorite</mat-icon>
+          }
+        </span>
+        <!-- timer-display: Muestra el tiempo restante para responder -->
+        | Tiempo restante: <span class="timer">{{ timeLeft() }}s</span>
+      </mat-card-subtitle>
     </mat-card-header>
 
     <!--
@@ -59,11 +69,13 @@
           Botón con ícono para reproducir el audio de la pregunta actual.
           - Evento click: llama a playAudio() pasando la URL almacenada en currentQuestion().audio.
           - Diseño: mat-icon-button con ícono de volumen.
+          - Funcionalidad añadida: Se deshabilita si el juego ha terminado.
         -->
         <button
           mat-icon-button
           class="play-button"
           (click)="playAudio(currentQuestion().audio)"
+          [disabled]="gameOver()"
         >
           <mat-icon>volume_up</mat-icon>
         </button>
@@ -85,6 +97,8 @@
             - Propósito: Permitir al usuario seleccionar una respuesta.
             - Estilo dinámico: [style] aplica color de texto y borde basado en getOptionColor(option).
             - Evento click: llama a selectOption(option) para evaluar la respuesta.
+            - Funcionalidad añadida:
+                * [disabled] deshabilita la opción si se agota el tiempo, ya acertó o se acabaron vidas.
           -->
         <button
           mat-stroked-button
@@ -94,6 +108,7 @@
             color: getOptionColor(option)
           }"
           (click)="selectOption(option)"
+          [disabled]="timeLeft() === 0 || correctAnswered() || gameOver()"
         >
           {{ option }}
         </button>
@@ -105,7 +120,9 @@
       game-actions:
       Sección final con el botón "Siguiente".
       - Propósito: Permitir avanzar a la siguiente pregunta.
-      - Lógica: [disabled] vinculado a correctAnswered() para bloquear hasta acertar.
+      - Lógica:
+          * [disabled] vinculado a correctAnswered() o gameOver() para bloquear hasta acertar o reiniciar.
+          * En caso de gameOver, al pulsar reinicia el juego y las vidas.
       - Diseño: next-button personalizado con degradado y efecto hover.
     -->
     <mat-card-actions class="game-actions">
@@ -113,7 +130,7 @@
         mat-raised-button
         class="next-button"
         (click)="nextQuestion()"
-        [disabled]="!correctAnswered()"
+        [disabled]="!(correctAnswered() || gameOver())"
       >
         Siguiente
       </button>

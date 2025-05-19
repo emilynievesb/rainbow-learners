@@ -33,6 +33,15 @@
       font-size: 1.2rem;
       color: #5e35b1;
     }
+    mat-card-subtitle .timer {
+      font-weight: bold;
+      color: #d81b60;
+    }
+
+    .option-button[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   .game-content {
