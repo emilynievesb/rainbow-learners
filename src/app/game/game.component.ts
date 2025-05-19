@@ -51,19 +51,81 @@ export class GameComponent implements OnInit {
   questions: GameQuestion[] = [
     {
       id: 1,
-      image: 'assets/images/red.png',
-      audio: 'assets/audio/red.mp3',
-      correctColor: 'Red',
-      options: ['Red', 'Green', 'Blue', 'Yellow'],
+      image: 'assets/images/black.png',
+      audio: 'assets/audio/black.mp3',
+      correctColor: 'Black',
+      options: ['Black', 'Blue', 'Brown', 'Fuchsia'],
     },
     {
       id: 2,
       image: 'assets/images/blue.png',
       audio: 'assets/audio/blue.mp3',
       correctColor: 'Blue',
-      options: ['Green', 'Blue', 'Red', 'Orange'],
+      options: ['Blue', 'Brown', 'Fuchsia', 'Gray'],
     },
-    // Más preguntas pueden añadirse aquí
+    {
+      id: 3,
+      image: 'assets/images/brown.png',
+      audio: 'assets/audio/brown.mp3',
+      correctColor: 'Brown',
+      options: ['Brown', 'Fuchsia', 'Gray', 'Green'],
+    },
+    {
+      id: 4,
+      image: 'assets/images/fuchsia.png',
+      audio: 'assets/audio/fuchsia.mp3',
+      correctColor: 'Fuchsia',
+      options: ['Fuchsia', 'Gray', 'Green', 'Orange'],
+    },
+    {
+      id: 5,
+      image: 'assets/images/gray.png',
+      audio: 'assets/audio/gray.mp3',
+      correctColor: 'Gray',
+      options: ['Gray', 'Green', 'Orange', 'Pink'],
+    },
+    {
+      id: 6,
+      image: 'assets/images/green.png',
+      audio: 'assets/audio/green.mp3',
+      correctColor: 'Green',
+      options: ['Green', 'Orange', 'Pink', 'Purple'],
+    },
+    {
+      id: 7,
+      image: 'assets/images/orange.png',
+      audio: 'assets/audio/orange.mp3',
+      correctColor: 'Orange',
+      options: ['Orange', 'Pink', 'Purple', 'Red'],
+    },
+    {
+      id: 8,
+      image: 'assets/images/pink.png',
+      audio: 'assets/audio/pink.mp3',
+      correctColor: 'Pink',
+      options: ['Pink', 'Purple', 'Red', 'Yellow'],
+    },
+    {
+      id: 9,
+      image: 'assets/images/purple.png',
+      audio: 'assets/audio/purple.mp3',
+      correctColor: 'Purple',
+      options: ['Purple', 'Red', 'Yellow', 'Black'],
+    },
+    {
+      id: 10,
+      image: 'assets/images/red.png',
+      audio: 'assets/audio/red.mp3',
+      correctColor: 'Red',
+      options: ['Red', 'Yellow', 'Black', 'Blue'],
+    },
+    {
+      id: 11,
+      image: 'assets/images/yellow.png',
+      audio: 'assets/audio/yellow.mp3',
+      correctColor: 'Yellow',
+      options: ['Yellow', 'Black', 'Blue', 'Brown'],
+    },
   ];
 
   /**
@@ -306,6 +368,16 @@ export class GameComponent implements OnInit {
         return '#212121';
       case 'white':
         return '#ffffff';
+      case 'brown':
+        return '#8d6e63';
+      case 'fuchsia':
+        return '#d81b60';
+      case 'gray':
+        return '#9e9e9e';
+      case 'pink':
+        return '#ec407a';
+      case 'purple':
+        return '#8e24aa';
       default:
         return '#424242';
     }

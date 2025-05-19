@@ -56,7 +56,71 @@ export class ColorService {
       audio: 'assets/audio/blue.mp3',
       description: 'El azul es un color calmante y refrescante.',
     },
-    // Agrega más objetos Color conforme se necesiten.
+    {
+      id: 4,
+      name: 'Amarillo',
+      english: 'Yellow',
+      image: 'assets/images/yellow.png',
+      audio: 'assets/audio/yellow.mp3',
+      description: 'El amarillo es alegre y lleno de energía.',
+    },
+    {
+      id: 5,
+      name: 'Naranja',
+      english: 'Orange',
+      image: 'assets/images/orange.png',
+      audio: 'assets/audio/orange.mp3',
+      description:
+        'El naranja combina la energía del rojo con la alegría del amarillo.',
+    },
+    {
+      id: 6,
+      name: 'Negro',
+      english: 'Black',
+      image: 'assets/images/black.png',
+      audio: 'assets/audio/black.mp3',
+      description: 'El negro es elegante y poderoso.',
+    },
+    {
+      id: 7,
+      name: 'Marrón',
+      english: 'Brown',
+      image: 'assets/images/brown.png',
+      audio: 'assets/audio/brown.mp3',
+      description: 'El marrón evoca la tierra y la estabilidad.',
+    },
+    {
+      id: 8,
+      name: 'Fucsia',
+      english: 'Fuchsia',
+      image: 'assets/images/fuchsia.png',
+      audio: 'assets/audio/fuchsia.mp3',
+      description: 'El fucsia es vibrante y creativo.',
+    },
+    {
+      id: 9,
+      name: 'Gris',
+      english: 'Gray',
+      image: 'assets/images/gray.png',
+      audio: 'assets/audio/gray.mp3',
+      description: 'El gris es neutro y equilibrado.',
+    },
+    {
+      id: 10,
+      name: 'Rosa',
+      english: 'Pink',
+      image: 'assets/images/pink.png',
+      audio: 'assets/audio/pink.mp3',
+      description: 'El rosa es suave y lleno de ternura.',
+    },
+    {
+      id: 11,
+      name: 'Púrpura',
+      english: 'Purple',
+      image: 'assets/images/purple.png',
+      audio: 'assets/audio/purple.mp3',
+      description: 'El púrpura transmite misterio y creatividad.',
+    },
   ]);
 
   /**
@@ -110,6 +174,16 @@ export class ColorService {
         return '#212121';
       case 'white':
         return '#ffffff';
+      case 'brown':
+        return '#8d6e63';
+      case 'fuchsia':
+        return '#d81b60';
+      case 'gray':
+        return '#9e9e9e';
+      case 'pink':
+        return '#ec407a';
+      case 'purple':
+        return '#8e24aa';
       default:
         return '#424242';
     }
