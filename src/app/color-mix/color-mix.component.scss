@@ -1,0 +1,26 @@
+.mix-card {
+  max-width: 500px;
+  margin: 2rem auto;
+  .mix-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .pick {
+      flex: 1 1 45%;
+    }
+    .result {
+      flex: 1 1 100%;
+      text-align: center;
+      .color-box {
+        width: 120px;
+        height: 120px;
+        margin: 0.5rem auto;
+        border-radius: 8px;
+        border: 2px solid #ccc;
+      }
+      .hex-code {
+        font-weight: bold;
+      }
+    }
+  }
+}

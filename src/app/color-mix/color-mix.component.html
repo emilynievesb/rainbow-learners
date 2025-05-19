@@ -1,0 +1,53 @@
+<mat-card class="mix-card">
+  <mat-card-header>
+    <mat-card-title>Mezcla de Colores</mat-card-title>
+    <mat-card-subtitle>
+      Selecciona dos colores y descubre el resultado de su mezcla
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="mix-content">
+    <!-- Selección de Color A -->
+    <div class="pick">
+      <mat-form-field appearance="fill">
+        <mat-label>Color A</mat-label>
+        <mat-select
+          [value]="pickA()"
+          (selectionChange)="pickA.set($event.value); mixColors()"
+        >
+          @for (c of colors(); track c.id) {
+          <mat-option [value]="c">
+            {{ c.english }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Selección de Color B -->
+    <div class="pick">
+      <mat-form-field appearance="fill">
+        <mat-label>Color B</mat-label>
+        <mat-select
+          [value]="pickB()"
+          (selectionChange)="pickB.set($event.value); mixColors()"
+        >
+          @for (c of colors(); track c.id) {
+          <mat-option [value]="c">
+            {{ c.english }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Resultado de la mezcla -->
+    @if (pickA() && pickB()) {
+    <div class="result">
+      <p>Resultado:</p>
+      <div class="color-box" [style.backgroundColor]="mixedHex()"></div>
+      <p class="hex-code">{{ mixedHex() }}</p>
+    </div>
+    }
+  </mat-card-content>
+</mat-card>

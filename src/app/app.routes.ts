@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { ColorsComponent } from './colors/colors.component';
 import { ColorDetailComponent } from './color-detail/color-detail.component';
 import { GameComponent } from './game/game.component';
+import { ColorMixComponent } from './color-mix/color-mix.component';
 
 /**
  * routes
@@ -37,6 +38,8 @@ export const routes: Routes = [
     path: 'game',
     component: GameComponent,
   },
+  { path: 'mix', component: ColorMixComponent },
+
   {
     // Ruta comodín:
     // - path '**' captura cualquier URL no definida arriba.

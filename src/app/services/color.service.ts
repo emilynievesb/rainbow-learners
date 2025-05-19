@@ -84,4 +84,34 @@ export class ColorService {
   getColorById(id: number): Color | undefined {
     return this._colors().find((color) => color.id === id);
   }
+
+  /**
+   * getOptionColor
+   *
+   * Devuelve un valor CSS de color según el nombre en inglés.
+   * Esto permite centralizar la paleta de colores en un solo lugar.
+   *
+   * @param option - Nombre del color en inglés (e.g., 'Red').
+   * @returns Cadena de color CSS en formato hexadecimal.
+   */
+  getOptionColor(option: string): string {
+    switch (option.toLowerCase()) {
+      case 'red':
+        return '#e53935';
+      case 'green':
+        return '#43a047';
+      case 'blue':
+        return '#1e88e5';
+      case 'yellow':
+        return '#fdd835';
+      case 'orange':
+        return '#fb8c00';
+      case 'black':
+        return '#212121';
+      case 'white':
+        return '#ffffff';
+      default:
+        return '#424242';
+    }
+  }
 }
